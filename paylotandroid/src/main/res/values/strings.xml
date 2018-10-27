@@ -1,0 +1,19 @@
+<resources>
+    <string name="app_name">Paylot Android</string>
+    <string name="default_merchant_name">Paylot Store</string>
+    <string name="default_tx_rate">100,000 NGN = 0.00456 BCH</string>
+    <string name="brand_text">Powered by Paylot</string>
+    <string name="get_address">Get Payment Address</string>
+    <string name="default_conversion">0.0005 BTC</string>
+    <string name="default_currency">Bitcoin</string>
+    <string name="currency_logo_desc">Currency logo</string>
+    <string name="default_timer">5m: 0s remaining</string>
+    <string name="select_option">Select payment option</string>
+    <string name="amount_due">Amount Due:  </string>
+    <string name="qr_desc">Scan the QR code below to reveal payment address, or tap to copy the given address and amount.</string>
+
+    <string name="retry">Retry</string>
+    <string name="wait">Wait</string>
+    <string name="payment_fail">Payment not successful</string>
+    <string name="payment_success">Payment completed</string>
+</resources>

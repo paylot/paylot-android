@@ -1,0 +1,4 @@
+<resources>
+    <string name="app_name">PaylotAndroid</string>
+    <string name="payment_successful">Payment Successful</string>
+</resources>
