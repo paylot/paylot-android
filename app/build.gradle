@@ -12,12 +12,14 @@ android {
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
     }
     buildTypes {
-        debug{
+        debug {
             buildConfigField 'String', "PaylotSecretKey", PAYLOT_SECRET
             buildConfigField 'String', "PaylotPublicKey", PAYLOT_PUBLIC
         }
         release {
-            minifyEnabled false
+            shrinkResources true
+            minifyEnabled true
+            debuggable true
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
             buildConfigField 'String', "PaylotSecretKey", PAYLOT_SECRET
             buildConfigField 'String', "PaylotPublicKey", PAYLOT_PUBLIC
@@ -26,8 +28,8 @@ android {
 }
 
 dependencies {
-    implementation project(":paylotandroid")
-    implementation fileTree(dir: 'libs', include: ['*.jar'])
+    implementation project(':paylotandroid')
+    implementation fileTree(include: ['*.jar'], dir: 'libs')
     implementation 'com.android.support:appcompat-v7:27.1.1'
     implementation 'com.android.support.constraint:constraint-layout:1.1.3'
     testImplementation 'junit:junit:4.12'

@@ -15,7 +15,6 @@ import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
 
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Locale;
@@ -103,14 +102,11 @@ public class PayActivity extends AppCompatActivity implements ProcessorAdapter.O
                     public void onResponse(@NonNull Call<HashedTxData> call,
                                            @NonNull Response<HashedTxData> response) {
                         if (response.isSuccessful()) {
+                            Helper.log(response.raw().toString());
                             processTransaction(response.body());
                         } else {
-                            try {
-                                Helper.log(response.errorBody().string());
-                            } catch (Exception e) {
-                                e.printStackTrace();
-                            }
-                            onError("Transaction not signed successfully.");
+Helper.logResponseError(response);
+                            onError(response.code() + ": Transaction not signed successfully.");
                         }
                     }
 
@@ -129,6 +125,7 @@ public class PayActivity extends AppCompatActivity implements ProcessorAdapter.O
                     public void onResponse(@NonNull Call<Merchant> call,
                                            @NonNull Response<Merchant> response) {
                         if (response.isSuccessful()) {
+                            Helper.log(response.toString());
                             merchant = response.body();
                             merchantLoaded = true;
 
@@ -137,11 +134,7 @@ public class PayActivity extends AppCompatActivity implements ProcessorAdapter.O
                             if (processorsLoaded)
                                 stopAnimating();
                         } else {
-                            try {
-                                Helper.log(response.errorBody().string());
-                            } catch (Exception e) {
-                                e.printStackTrace();
-                            }
+                            Helper.logResponseError(response);
                             onError(response.code() + ": Could not fetch merchant.");
                         }
                     }
@@ -168,6 +161,7 @@ public class PayActivity extends AppCompatActivity implements ProcessorAdapter.O
                     public void onResponse(@NonNull Call<List<ProcessorItem>> call,
                                            @NonNull Response<List<ProcessorItem>> response) {
                         if (response.isSuccessful()) {
+                            Helper.log(response.toString());
                             processorsLoaded = true;
 
                             if (response.body() != null) {
@@ -177,11 +171,7 @@ public class PayActivity extends AppCompatActivity implements ProcessorAdapter.O
                             if (merchantLoaded)
                                 stopAnimating();
                         } else {
-                            try {
-                                Helper.log(response.errorBody().string());
-                            } catch (IOException e) {
-                                e.printStackTrace();
-                            }
+                            Helper.logResponseError(response);
                             onError("Transaction not processed successfully.");
                         }
                     }

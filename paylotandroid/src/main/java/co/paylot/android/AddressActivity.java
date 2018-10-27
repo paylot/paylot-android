@@ -8,6 +8,7 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.os.CountDownTimer;
 import android.support.annotation.NonNull;
+import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.Button;
@@ -22,8 +23,8 @@ import com.bumptech.glide.request.RequestOptions;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import java.io.IOException;
 import java.util.Locale;
+import java.util.concurrent.TimeUnit;
 
 import co.paylot.android.models.Merchant;
 import co.paylot.android.models.ProcessorItem;
@@ -77,7 +78,10 @@ public class AddressActivity extends AppCompatActivity implements View.OnClickLi
     }
 
     private void initiateWebSocket() {
-        OkHttpClient client = new OkHttpClient();
+        OkHttpClient client = new OkHttpClient.Builder()
+                .connectTimeout(30, TimeUnit.SECONDS)
+                .retryOnConnectionFailure(true)
+                .build();
         Request request = new Request.Builder()
                 .url(SOCKET_URL)
                 .build();
@@ -101,11 +105,7 @@ public class AddressActivity extends AppCompatActivity implements View.OnClickLi
                     initiateWebSocket();
                     stopAnimating();
                 } else {
-                    try {
-                        Helper.log(response.errorBody().string());
-                    } catch (IOException e) {
-                        e.printStackTrace();
-                    }
+                    Helper.logResponseError(response);
                     onError("Error " + response.code() + ": Could not initiate transaction");
                 }
             }
@@ -314,7 +314,10 @@ public class AddressActivity extends AppCompatActivity implements View.OnClickLi
                                 && response.body().isSent()) {
                             onTransactionSuccess();
                         }else if(closeOnFail){
+                            Helper.logResponseError(response);
                             onTransactionFailed();
+                        } else {
+                            Helper.logResponseError(response);
                         }
                     }
 
@@ -386,6 +389,12 @@ public class AddressActivity extends AppCompatActivity implements View.OnClickLi
         public void onClosed(WebSocket webSocket, int code, String reason) {
             Helper.log("Socket disconnected successfully.");
             super.onClosed(webSocket, code, reason);
+        }
+
+        @Override
+        public void onFailure(WebSocket webSocket, Throwable t, @Nullable okhttp3.Response response) {
+            Helper.log("Socket connection failed.");
+            super.onFailure(webSocket, t, response);
         }
     }
 }
