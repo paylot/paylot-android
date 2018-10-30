@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/currency_layout"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@drawable/paylot_rounded_bg_white"
+    android:focusable="true"
+    android:gravity="center"
+    android:orientation="vertical"
+    android:padding="8dp">
+
+    <TextView
+        android:id="@+id/currency_name"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:padding="8dp"
+        android:text="@string/paylot_default_currency"
+        android:textColor="@color/paylot_black"
+        android:textSize="18sp" />
+
+    <ImageView
+        android:id="@+id/currency_logo"
+        android:layout_width="32dp"
+        android:layout_height="32dp"
+        android:layout_margin="8dp"
+        android:contentDescription="@string/paylot_currency_logo_desc"
+        app:srcCompat="@drawable/paylot_ic_currency" />
+
+    <TextView
+        android:id="@+id/currency_value"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:padding="8dp"
+        android:text="@string/paylot_default_conversion"
+        android:textColor="@color/paylot_black"
+        android:textSize="18sp"
+        android:textStyle="bold" />
+</LinearLayout>

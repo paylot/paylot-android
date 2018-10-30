@@ -4,7 +4,7 @@
     <modules>
       <module fileurl="file://$PROJECT_DIR$/PaylotAndroid.iml" filepath="$PROJECT_DIR$/PaylotAndroid.iml" />
       <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
-      <module fileurl="file://$PROJECT_DIR$/paylotandroid/paylotandroid.iml" filepath="$PROJECT_DIR$/paylotandroid/paylotandroid.iml" />
+      <module fileurl="file://$PROJECT_DIR$/paylot/paylot.iml" filepath="$PROJECT_DIR$/paylot/paylot.iml" />
     </modules>
   </component>
 </project>

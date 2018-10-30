@@ -5,5 +5,13 @@
 /.idea/libraries
 .DS_Store
 /build
+/paylot/build
+/gradle/wrapper/grale-4.5.zip
 /captures
 .externalNativeBuild
+gradle/wrapper/gradle-4.5.zip
+app/release/
+gradle/wrapper/gradle-4.5.zip
+paylot/.gitignore
+paylot/src/androidTest/
+paylot/src/test/

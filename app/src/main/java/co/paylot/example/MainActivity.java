@@ -14,12 +14,13 @@ import android.widget.Toast;
 import java.util.Date;
 
 import co.paylot.android.PaylotConstants;
-import co.paylot.android.PaylotManager;
+import co.paylot.android.PaylotPay;
 import co.paylot.android.models.Transaction;
 
 public class MainActivity extends AppCompatActivity {
 
     public static final String DEFAULT_EMAIL = "dosky.ogbo91@gmail.com";
+    public static final String DEFAULT_REFERENCE = "ba5e83b5ac8541d4b9fb604586efba94";
     private TextInputEditText amountInput, emailInput;
     private TextView amountText, referenceText;
     private LinearLayout paySuccessLayout;
@@ -40,15 +41,17 @@ public class MainActivity extends AppCompatActivity {
 
     public void pay(View view) {
         if(inputValid()) {
-            PaylotManager paylotManager = new PaylotManager(this)
+            PaylotPay paylotPay = new PaylotPay(this)
                     .setAmount(amount)
                     .setCurrency("NGN")
                     .setEmail(email)
+                    .setShouldSendMail(true)
                     .setPublicKey(BuildConfig.PaylotPublicKey)
                     .setSecretKey(BuildConfig.PaylotSecretKey)
+                    .setSubAccount(DEFAULT_REFERENCE)
                     .setReference(String.valueOf(new Date().getTime()));
 
-            paylotManager.initialize();
+            paylotPay.initialize();
         }
     }
 
